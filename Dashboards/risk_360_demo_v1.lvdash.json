@@ -565,12 +565,12 @@
         " FROM demo_banking_silver.qdp_organisations_all.hub_organisation h\r\n",
         " JOIN demo_banking_silver.qdp_organisations_all.sat_organisation s\r\n",
         "   ON h.organisation_id = s.organisation_id\r\n",
-        " JOIN demo_banking_silver.qdp_organisations_all.sat_organisation_risk_scores r   \r\n",
+        " JOIN demo_banking_silver.qdp_organisations_all.sat_organisation_risk_ratings r   \r\n",
         "   ON s.organisation_id = r.organisation_id\r\n",
         " JOIN demo_banking_silver.qdp_refcodes_all.tennant t\r\n",
         "   ON h.tennant_id = t.tennant_id\r\n",
         " WHERE t.tennant_name = :p_tennant_name AND \r\n",
-        "       r.risk_code = 'High Risk Country'\r\n",
+        "       r.risk_rating_code = 'High Risk Country'\r\n",
         " ORDER BY  s.organisation_name\r\n",
         "      \r\n",
         ";"
@@ -620,6 +620,49 @@
               "values": [
                 {
                   "value": "Banking Supply Chain Demo"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "511aa244",
+      "displayName": "view_transactions",
+      "queryLines": [
+        "SELECT\r\n",
+        "    t.tennant_name,\r\n",
+        "    h.transaction_id,\r\n",
+        "    s.load_datetime,\r\n",
+        "    s.record_source_id,\r\n",
+        "    s.type_code,\r\n",
+        "    s.datetime,\r\n",
+        "    s.amount,\r\n",
+        "    s.original_currency_code,\r\n",
+        "    s.description\r\n",
+        "\r\n",
+        "    FROM demo_banking_silver.qdp_transactions_all.hub_transaction h\r\n",
+        "    JOIN demo_banking_silver.qdp_transactions_all.sat_transaction s\r\n",
+        "      ON h.transaction_id = s.transaction_id\r\n",
+        "    JOIN demo_banking_silver.qdp_refcodes_all.tennant t\r\n",
+        "      ON h.tennant_id = t.tennant_id\r\n",
+        "      WHERE t.tennant_name = :p_tennant_name\r\n",
+        "    ORDER BY s.datetime\r\n",
+        ";\r\n",
+        "\r\n"
+      ],
+      "parameters": [
+        {
+          "displayName": "p_tennant_name",
+          "keyword": "p_tennant_name",
+          "dataType": "STRING",
+          "defaultSelection": {
+            "values": {
+              "dataType": "STRING",
+              "values": [
+                {
+                  "value": "Risk 360 Demo"
                 }
               ]
             }
@@ -6502,6 +6545,116 @@
         }
       ],
       "pageType": "PAGE_TYPE_CANVAS"
+    },
+    {
+      "name": "d1f0d414",
+      "displayName": "Transactions",
+      "layout": [
+        {
+          "widget": {
+            "name": "4465de36",
+            "multilineTextboxSpec": {
+              "lines": [
+                "![](https://www.quantexa.com/images/quantexa.svg)"
+              ]
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 2,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "3f9b9492",
+            "multilineTextboxSpec": {
+              "lines": [
+                "# Transactions"
+              ]
+            }
+          },
+          "position": {
+            "x": 2,
+            "y": 0,
+            "width": 6,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "cbc5d568",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "511aa244",
+                  "fields": [
+                    {
+                      "name": "tennant_name",
+                      "expression": "`tennant_name`"
+                    },
+                    {
+                      "name": "type_code",
+                      "expression": "`type_code`"
+                    },
+                    {
+                      "name": "datetime",
+                      "expression": "`datetime`"
+                    },
+                    {
+                      "name": "amount",
+                      "expression": "`amount`"
+                    },
+                    {
+                      "name": "original_currency_code",
+                      "expression": "`original_currency_code`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "rowsPerPage": 25,
+              "displayRowNumbers": true,
+              "widgetType": "table",
+              "encodings": {
+                "columns": [
+                  {
+                    "fieldName": "tennant_name"
+                  },
+                  {
+                    "fieldName": "type_code"
+                  },
+                  {
+                    "fieldName": "datetime"
+                  },
+                  {
+                    "fieldName": "amount"
+                  },
+                  {
+                    "fieldName": "original_currency_code"
+                  }
+                ]
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 2,
+            "width": 12,
+            "height": 6
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_CANVAS",
+      "layoutVersion": "GRID_V1"
     }
   ],
   "uiSettings": {
