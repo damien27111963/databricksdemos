@@ -639,7 +639,8 @@
         "    s.type_code,\r\n",
         "    s.datetime,\r\n",
         "    s.amount,\r\n",
-        "    s.original_currency_code,\r\n",
+        "    s.original_currency_code AS Orig_Currency,\r\n",
+        "    s.currency_code AS Bene_Currency,\r\n",
         "    s.description\r\n",
         "\r\n",
         "    FROM demo_banking_silver.qdp_transactions_all.hub_transaction h\r\n",
@@ -1531,7 +1532,7 @@
             "name": "53cfa0b8",
             "queries": [
               {
-                "name": "dashboards/01f0aa6f96361e8b881b57a14d7f399e/datasets/01f0aa6fb11d150481ded53943778638_tennant_name",
+                "name": "dashboards/01f14eabc2741320a8139704dbaf39f8/datasets/01f14eabc27414268ff08e1cff9024f1_tennant_name",
                 "query": {
                   "datasetName": "7244ec6a",
                   "fields": [
@@ -1548,7 +1549,7 @@
                 }
               },
               {
-                "name": "parameter_dashboards/01f0aa6f96361e8b881b57a14d7f399e/datasets/01f0aa6f9637147998f1d0558b6ba211_p_tennant_name",
+                "name": "parameter_dashboards/01f14eabc2741320a8139704dbaf39f8/datasets/01f14eabc27413d19d68c4d3934dae64_p_tennant_name",
                 "query": {
                   "datasetName": "b477f1a1",
                   "parameters": [
@@ -1561,7 +1562,7 @@
                 }
               },
               {
-                "name": "parameter_dashboards/01f0aa6f96361e8b881b57a14d7f399e/datasets/01f0aa6f963714ff894108a0b2f4311e_p_tennant_name",
+                "name": "parameter_dashboards/01f14eabc2741320a8139704dbaf39f8/datasets/01f14eabc27413ffae19c7482fe14569_p_tennant_name",
                 "query": {
                   "datasetName": "9fee711a",
                   "parameters": [
@@ -1574,7 +1575,7 @@
                 }
               },
               {
-                "name": "parameter_dashboards/01f0aa6f96361e8b881b57a14d7f399e/datasets/01f0aa6f96371510a56855615a8dff2e_p_tennant_name",
+                "name": "parameter_dashboards/01f14eabc2741320a8139704dbaf39f8/datasets/01f14eabc2741407bb15b93d5bd6a97b_p_tennant_name",
                 "query": {
                   "datasetName": "cd300530",
                   "parameters": [
@@ -1587,7 +1588,7 @@
                 }
               },
               {
-                "name": "parameter_dashboards/01f0aa6f96361e8b881b57a14d7f399e/datasets/01f0aa6f9637154b96e744efa94fbaa7_p_tennant_name",
+                "name": "parameter_dashboards/01f14eabc2741320a8139704dbaf39f8/datasets/01f14eabc27414169d0e5070e1b20d0d_p_tennant_name",
                 "query": {
                   "datasetName": "78d63fed",
                   "parameters": [
@@ -1600,7 +1601,7 @@
                 }
               },
               {
-                "name": "parameter_dashboards/01f0aa6f96361e8b881b57a14d7f399e/datasets/01f0aa6f96371554851d125f49117086_p_tennant_name",
+                "name": "parameter_dashboards/01f14eabc2741320a8139704dbaf39f8/datasets/01f14eabc274141eaa98ccd76105ef08_p_tennant_name",
                 "query": {
                   "datasetName": "1af8fba7",
                   "parameters": [
@@ -1613,7 +1614,7 @@
                 }
               },
               {
-                "name": "parameter_dashboards/01f0aa6f96361e8b881b57a14d7f399e/datasets/01f0aa6f963714f08f52609444f6245d_p_tennant_name",
+                "name": "parameter_dashboards/01f14eabc2741320a8139704dbaf39f8/datasets/01f14eabc27413f7b1a14b9e4d34ebcc_p_tennant_name",
                 "query": {
                   "datasetName": "193c0a20",
                   "parameters": [
@@ -1626,7 +1627,7 @@
                 }
               },
               {
-                "name": "parameter_dashboards/01f0aa6f96361e8b881b57a14d7f399e/datasets/01f0aa6f96371541aa9b6d686e44508f_p_tennant_name",
+                "name": "parameter_dashboards/01f14eabc2741320a8139704dbaf39f8/datasets/01f14eabc274140ea6496baff489aef4_p_tennant_name",
                 "query": {
                   "datasetName": "0879f187",
                   "parameters": [
@@ -1639,7 +1640,7 @@
                 }
               },
               {
-                "name": "parameter_dashboards/01f0aa6f96361e8b881b57a14d7f399e/datasets/01f0aaa0cbfc19f1852344edd3068b54_p_tennant_name",
+                "name": "parameter_dashboards/01f14eabc2741320a8139704dbaf39f8/datasets/01f14eabc274142da3881b65889e396c_p_tennant_name",
                 "query": {
                   "datasetName": "9c297ce8",
                   "parameters": [
@@ -1652,7 +1653,7 @@
                 }
               },
               {
-                "name": "parameter_dashboards/01f0aa6f96361e8b881b57a14d7f399e/datasets/01f0aaa58de319c598b4c360f3821cb7_p_tennant_name",
+                "name": "parameter_dashboards/01f14eabc2741320a8139704dbaf39f8/datasets/01f14eabc27414358a18a2e4790066f3_p_tennant_name",
                 "query": {
                   "datasetName": "e7256cb7",
                   "parameters": [
@@ -1665,7 +1666,7 @@
                 }
               },
               {
-                "name": "parameter_dashboards/01f0aa6f96361e8b881b57a14d7f399e/datasets/01f0aaa8873412468cb73e07546624c1_p_tennant_name",
+                "name": "parameter_dashboards/01f14eabc2741320a8139704dbaf39f8/datasets/01f14eabc274143c8ffd1321f2dff1aa_p_tennant_name",
                 "query": {
                   "datasetName": "5e15a228",
                   "parameters": [
@@ -1678,7 +1679,7 @@
                 }
               },
               {
-                "name": "parameter_dashboards/01f0aa6f96361e8b881b57a14d7f399e/datasets/01f0aa6f963714e6ab7368d8eb1b2d6a_p_tennant_name",
+                "name": "parameter_dashboards/01f14eabc2741320a8139704dbaf39f8/datasets/01f14eabc27413efa6196ad3507d87ac_p_tennant_name",
                 "query": {
                   "datasetName": "a8c371b6",
                   "parameters": [
@@ -1691,7 +1692,7 @@
                 }
               },
               {
-                "name": "parameter_dashboards/01f0aa6f96361e8b881b57a14d7f399e/datasets/01f1140a72a4178a98233dc9709ae9ec_p_tennant_name",
+                "name": "parameter_dashboards/01f14eabc2741320a8139704dbaf39f8/datasets/01f14eabc27414438c1f16cd726a05f9_p_tennant_name",
                 "query": {
                   "datasetName": "13ffa0da",
                   "parameters": [
@@ -1704,9 +1705,22 @@
                 }
               },
               {
-                "name": "parameter_dashboards/01f0aa6f96361e8b881b57a14d7f399e/datasets/01f1140b69f819c78aa57b761e93c6ed_p_tennant_name",
+                "name": "parameter_dashboards/01f14eabc2741320a8139704dbaf39f8/datasets/01f14eabc274144b990ecf6f1d3c76c9_p_tennant_name",
                 "query": {
                   "datasetName": "db85ebcf",
+                  "parameters": [
+                    {
+                      "name": "p_tennant_name",
+                      "keyword": "p_tennant_name"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              },
+              {
+                "name": "parameter_dashboards/01f14eabc2741320a8139704dbaf39f8/datasets/01f1811880b815e6a7f3ef271356636a_p_tennant_name",
+                "query": {
+                  "datasetName": "511aa244",
                   "parameters": [
                     {
                       "name": "p_tennant_name",
@@ -1740,59 +1754,63 @@
                 "fields": [
                   {
                     "fieldName": "tennant_name",
-                    "queryName": "dashboards/01f0aa6f96361e8b881b57a14d7f399e/datasets/01f0aa6fb11d150481ded53943778638_tennant_name"
+                    "queryName": "dashboards/01f14eabc2741320a8139704dbaf39f8/datasets/01f14eabc27414268ff08e1cff9024f1_tennant_name"
                   },
                   {
                     "parameterName": "p_tennant_name",
-                    "queryName": "parameter_dashboards/01f0aa6f96361e8b881b57a14d7f399e/datasets/01f0aa6f9637147998f1d0558b6ba211_p_tennant_name"
+                    "queryName": "parameter_dashboards/01f14eabc2741320a8139704dbaf39f8/datasets/01f14eabc27413d19d68c4d3934dae64_p_tennant_name"
                   },
                   {
                     "parameterName": "p_tennant_name",
-                    "queryName": "parameter_dashboards/01f0aa6f96361e8b881b57a14d7f399e/datasets/01f0aa6f963714ff894108a0b2f4311e_p_tennant_name"
+                    "queryName": "parameter_dashboards/01f14eabc2741320a8139704dbaf39f8/datasets/01f14eabc27413ffae19c7482fe14569_p_tennant_name"
                   },
                   {
                     "parameterName": "p_tennant_name",
-                    "queryName": "parameter_dashboards/01f0aa6f96361e8b881b57a14d7f399e/datasets/01f0aa6f96371510a56855615a8dff2e_p_tennant_name"
+                    "queryName": "parameter_dashboards/01f14eabc2741320a8139704dbaf39f8/datasets/01f14eabc2741407bb15b93d5bd6a97b_p_tennant_name"
                   },
                   {
                     "parameterName": "p_tennant_name",
-                    "queryName": "parameter_dashboards/01f0aa6f96361e8b881b57a14d7f399e/datasets/01f0aa6f9637154b96e744efa94fbaa7_p_tennant_name"
+                    "queryName": "parameter_dashboards/01f14eabc2741320a8139704dbaf39f8/datasets/01f14eabc27414169d0e5070e1b20d0d_p_tennant_name"
                   },
                   {
                     "parameterName": "p_tennant_name",
-                    "queryName": "parameter_dashboards/01f0aa6f96361e8b881b57a14d7f399e/datasets/01f0aa6f96371554851d125f49117086_p_tennant_name"
+                    "queryName": "parameter_dashboards/01f14eabc2741320a8139704dbaf39f8/datasets/01f14eabc274141eaa98ccd76105ef08_p_tennant_name"
                   },
                   {
                     "parameterName": "p_tennant_name",
-                    "queryName": "parameter_dashboards/01f0aa6f96361e8b881b57a14d7f399e/datasets/01f0aa6f963714f08f52609444f6245d_p_tennant_name"
+                    "queryName": "parameter_dashboards/01f14eabc2741320a8139704dbaf39f8/datasets/01f14eabc27413f7b1a14b9e4d34ebcc_p_tennant_name"
                   },
                   {
                     "parameterName": "p_tennant_name",
-                    "queryName": "parameter_dashboards/01f0aa6f96361e8b881b57a14d7f399e/datasets/01f0aa6f96371541aa9b6d686e44508f_p_tennant_name"
+                    "queryName": "parameter_dashboards/01f14eabc2741320a8139704dbaf39f8/datasets/01f14eabc274140ea6496baff489aef4_p_tennant_name"
                   },
                   {
                     "parameterName": "p_tennant_name",
-                    "queryName": "parameter_dashboards/01f0aa6f96361e8b881b57a14d7f399e/datasets/01f0aaa0cbfc19f1852344edd3068b54_p_tennant_name"
+                    "queryName": "parameter_dashboards/01f14eabc2741320a8139704dbaf39f8/datasets/01f14eabc274142da3881b65889e396c_p_tennant_name"
                   },
                   {
                     "parameterName": "p_tennant_name",
-                    "queryName": "parameter_dashboards/01f0aa6f96361e8b881b57a14d7f399e/datasets/01f0aaa58de319c598b4c360f3821cb7_p_tennant_name"
+                    "queryName": "parameter_dashboards/01f14eabc2741320a8139704dbaf39f8/datasets/01f14eabc27414358a18a2e4790066f3_p_tennant_name"
                   },
                   {
                     "parameterName": "p_tennant_name",
-                    "queryName": "parameter_dashboards/01f0aa6f96361e8b881b57a14d7f399e/datasets/01f0aaa8873412468cb73e07546624c1_p_tennant_name"
+                    "queryName": "parameter_dashboards/01f14eabc2741320a8139704dbaf39f8/datasets/01f14eabc274143c8ffd1321f2dff1aa_p_tennant_name"
                   },
                   {
                     "parameterName": "p_tennant_name",
-                    "queryName": "parameter_dashboards/01f0aa6f96361e8b881b57a14d7f399e/datasets/01f0aa6f963714e6ab7368d8eb1b2d6a_p_tennant_name"
+                    "queryName": "parameter_dashboards/01f14eabc2741320a8139704dbaf39f8/datasets/01f14eabc27413efa6196ad3507d87ac_p_tennant_name"
                   },
                   {
                     "parameterName": "p_tennant_name",
-                    "queryName": "parameter_dashboards/01f0aa6f96361e8b881b57a14d7f399e/datasets/01f1140a72a4178a98233dc9709ae9ec_p_tennant_name"
+                    "queryName": "parameter_dashboards/01f14eabc2741320a8139704dbaf39f8/datasets/01f14eabc27414438c1f16cd726a05f9_p_tennant_name"
                   },
                   {
                     "parameterName": "p_tennant_name",
-                    "queryName": "parameter_dashboards/01f0aa6f96361e8b881b57a14d7f399e/datasets/01f1140b69f819c78aa57b761e93c6ed_p_tennant_name"
+                    "queryName": "parameter_dashboards/01f14eabc2741320a8139704dbaf39f8/datasets/01f14eabc274144b990ecf6f1d3c76c9_p_tennant_name"
+                  },
+                  {
+                    "parameterName": "p_tennant_name",
+                    "queryName": "parameter_dashboards/01f14eabc2741320a8139704dbaf39f8/datasets/01f1811880b815e6a7f3ef271356636a_p_tennant_name"
                   }
                 ]
               }
@@ -6608,8 +6626,12 @@
                       "expression": "`amount`"
                     },
                     {
-                      "name": "original_currency_code",
-                      "expression": "`original_currency_code`"
+                      "name": "Orig_Currency",
+                      "expression": "`Orig_Currency`"
+                    },
+                    {
+                      "name": "Bene_Currency",
+                      "expression": "`Bene_Currency`"
                     }
                   ],
                   "disaggregated": true
@@ -6636,7 +6658,10 @@
                     "fieldName": "amount"
                   },
                   {
-                    "fieldName": "original_currency_code"
+                    "fieldName": "Orig_Currency"
+                  },
+                  {
+                    "fieldName": "Bene_Currency"
                   }
                 ]
               },
