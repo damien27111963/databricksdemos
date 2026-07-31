@@ -632,30 +632,110 @@
       "displayName": "view_transactions",
       "queryLines": [
         "SELECT\r\n",
-        "    t.tennant_name,\r\n",
-        "    h.transaction_id,\r\n",
-        "    s.load_datetime,\r\n",
-        "    s.record_source_id,\r\n",
-        "    s.type_code,\r\n",
-        "    s.datetime,\r\n",
-        "    s.amount,\r\n",
-        "    s.original_currency_code AS Orig_Currency,\r\n",
-        "    s.currency_code AS Bene_Currency,\r\n",
-        "    s.description\r\n",
-        "\r\n",
-        "    FROM demo_banking_silver.qdp_transactions_all.hub_transaction h\r\n",
+        "  h.tennant_id,\r\n",
+        "  t.tennant_name,\r\n",
+        "  s.beneficiary_name,\r\n",
+        "  s.original_account_name AS orignator_name,\r\n",
+        "  s.amount,\r\n",
+        "  s.debit_or_credit_code,\r\n",
+        "  s.currency_code AS beneficary_currency_code,\r\n",
+        "  s.original_currency_code AS origator_currency_code,\r\n",
+        "  h.transaction_id,\r\n",
+        "  h.orig_account_entity_id,\r\n",
+        "  h.bene_account_entity_id,\r\n",
+        "  h.transaction_entity_id,\r\n",
+        "  h.bene_account_id,\r\n",
+        "  h.orig_account_id,\r\n",
+        "  h.transaction_id_raw,\r\n",
+        "  h.period_start AS hub_period_start,\r\n",
+        "  h.period_end AS hub_period_end,\r\n",
+        "  s.type_code,\r\n",
+        "  s.type_concept_id,\r\n",
+        "  s.type_raw_code,\r\n",
+        "  s.type_raw_concept_id,\r\n",
+        "  s.debit_or_credit_concept_id,\r\n",
+        "  s.debit_or_credit_raw_code,\r\n",
+        "  s.debit_or_credit_raw_concept_id,\r\n",
+        "  s.counterparty_account_id,\r\n",
+        "  s.counterparty_account_transaction_id,\r\n",
+        "  s.is_self_transaction,\r\n",
+        "  s.is_international_transaction,\r\n",
+        "  s.datetime,\r\n",
+        "  s.description,\r\n",
+        "  s.balance_after,\r\n",
+        "  s.balance_before,\r\n",
+        "  s.payment_method_code,\r\n",
+        "  s.payment_method_concept_id,\r\n",
+        "  s.payment_method_raw_code,\r\n",
+        "  s.payment_method_raw_concept_id,\r\n",
+        "  s.reference,\r\n",
+        "  s.account_sort_code,\r\n",
+        "  s.account_number,\r\n",
+        "  s.account_number_suffix,\r\n",
+        "  s.iban,\r\n",
+        "  s.swiftbic,\r\n",
+        "  s.currency_concept_id,\r\n",
+        "  s.currency_raw_code,\r\n",
+        "  s.currency_raw_concept_id,\r\n",
+        "  s.country_code,\r\n",
+        "  s.country_concept_id,\r\n",
+        "  s.country_raw_code,\r\n",
+        "  s.country_raw_concept_id,\r\n",
+        "  s.original_amount,\r\n",
+        "  s.original_account_number,\r\n",
+        "  s.original_account_sort_code,\r\n",
+        "  s.original_iban,\r\n",
+        "  s.original_currency_concept_id,\r\n",
+        "  s.original_currency_raw_code,\r\n",
+        "  s.original_currency_raw_concept_id,\r\n",
+        "  s.original_country_code,\r\n",
+        "  s.original_country_concept_id,\r\n",
+        "  s.original_country_raw_code,\r\n",
+        "  s.original_country_raw_concept_id,\r\n",
+        "  s.original_bank,\r\n",
+        "  s.original_bank_country_code,\r\n",
+        "  s.institution_bank,\r\n",
+        "  s.institution_bank_country_code,\r\n",
+        "  s.sending_bank,\r\n",
+        "  s.sending_bank_country_code,\r\n",
+        "  s.beneficiary_bank,\r\n",
+        "  s.beneficiary_bank_country_code,\r\n",
+        "  s.payment_booking_date,\r\n",
+        "  s.payment_booking_system_code,\r\n",
+        "  s.payment_booking_system_concept_id,\r\n",
+        "  s.payment_booking_system_raw_code,\r\n",
+        "  s.payment_booking_system_raw_concept_id,\r\n",
+        "  s.payment_type_code,\r\n",
+        "  s.payment_type_concept_id,\r\n",
+        "  s.payment_type_raw_code,\r\n",
+        "  s.payment_type_raw_concept_id,\r\n",
+        "  s.other_receiver_information,\r\n",
+        "  s.payment_party_id,\r\n",
+        "  s.payment_account_number,\r\n",
+        "  s.payment_source_code,\r\n",
+        "  s.period_start,\r\n",
+        "  s.period_end,\r\n",
+        "  s.load_datetime,\r\n",
+        "  s.record_source_id,\r\n",
+        "  s.data_source_code,\r\n",
+        "  s.data_source_concept_id,\r\n",
+        "  s.data_source_raw_code,\r\n",
+        "  s.data_source_raw_concept_id\r\n",
+        "FROM\r\n",
+        "  demo_banking_silver.qdp_transactions_all.hub_transaction h\r\n",
         "    JOIN demo_banking_silver.qdp_transactions_all.sat_transaction s\r\n",
         "      ON h.transaction_id = s.transaction_id\r\n",
         "    JOIN demo_banking_silver.qdp_refcodes_all.tennant t\r\n",
         "      ON h.tennant_id = t.tennant_id\r\n",
-        "      WHERE t.tennant_name = :p_tennant_name\r\n",
-        "    ORDER BY s.datetime\r\n",
-        ";\r\n",
-        "\r\n"
+        "WHERE t.tennant_name = :p_tennant_name\r\n",
+        "\r\n",
+        "ORDER BY\r\n",
+        "  s.beneficiary_name,\r\n",
+        "  s.datetime"
       ],
       "parameters": [
         {
-          "displayName": "p_tennant_name",
+          "displayName": "Tennant Name",
           "keyword": "p_tennant_name",
           "dataType": "STRING",
           "defaultSelection": {
@@ -669,6 +749,110 @@
             }
           }
         }
+      ]
+    },
+    {
+      "name": "c8451f0b",
+      "displayName": "Tenant Transaction Details with Account and Currency Data",
+      "queryLines": [
+        "SELECT\r\n",
+        "  h.tennant_id,\r\n",
+        "  t.tennant_name,\r\n",
+        "  s.beneficiary_name,\r\n",
+        "  s.original_account_name AS orignator_name,\r\n",
+        "  s.amount,\r\n",
+        "  s.debit_or_credit_code,\r\n",
+        "  s.currency_code AS beneficary_currency_code,\r\n",
+        "  s.original_currency_code AS origator_currency_code,\r\n",
+        "  h.transaction_id,\r\n",
+        "  h.orig_account_entity_id,\r\n",
+        "  h.bene_account_entity_id,\r\n",
+        "  h.transaction_entity_id,\r\n",
+        "  h.bene_account_id,\r\n",
+        "  h.orig_account_id,\r\n",
+        "  h.transaction_id_raw,\r\n",
+        "  h.period_start AS hub_period_start,\r\n",
+        "  h.period_end AS hub_period_end,\r\n",
+        "  s.type_code,\r\n",
+        "  s.type_concept_id,\r\n",
+        "  s.type_raw_code,\r\n",
+        "  s.type_raw_concept_id,\r\n",
+        "  s.debit_or_credit_concept_id,\r\n",
+        "  s.debit_or_credit_raw_code,\r\n",
+        "  s.debit_or_credit_raw_concept_id,\r\n",
+        "  s.counterparty_account_id,\r\n",
+        "  s.counterparty_account_transaction_id,\r\n",
+        "  s.is_self_transaction,\r\n",
+        "  s.is_international_transaction,\r\n",
+        "  s.datetime,\r\n",
+        "  s.description,\r\n",
+        "  s.balance_after,\r\n",
+        "  s.balance_before,\r\n",
+        "  s.payment_method_code,\r\n",
+        "  s.payment_method_concept_id,\r\n",
+        "  s.payment_method_raw_code,\r\n",
+        "  s.payment_method_raw_concept_id,\r\n",
+        "  s.reference,\r\n",
+        "  s.account_sort_code,\r\n",
+        "  s.account_number,\r\n",
+        "  s.account_number_suffix,\r\n",
+        "  s.iban,\r\n",
+        "  s.swiftbic,\r\n",
+        "  s.currency_concept_id,\r\n",
+        "  s.currency_raw_code,\r\n",
+        "  s.currency_raw_concept_id,\r\n",
+        "  s.country_code,\r\n",
+        "  s.country_concept_id,\r\n",
+        "  s.country_raw_code,\r\n",
+        "  s.country_raw_concept_id,\r\n",
+        "  s.original_amount,\r\n",
+        "  s.original_account_number,\r\n",
+        "  s.original_account_sort_code,\r\n",
+        "  s.original_iban,\r\n",
+        "  s.original_currency_concept_id,\r\n",
+        "  s.original_currency_raw_code,\r\n",
+        "  s.original_currency_raw_concept_id,\r\n",
+        "  s.original_country_code,\r\n",
+        "  s.original_country_concept_id,\r\n",
+        "  s.original_country_raw_code,\r\n",
+        "  s.original_country_raw_concept_id,\r\n",
+        "  s.original_bank,\r\n",
+        "  s.original_bank_country_code,\r\n",
+        "  s.institution_bank,\r\n",
+        "  s.institution_bank_country_code,\r\n",
+        "  s.sending_bank,\r\n",
+        "  s.sending_bank_country_code,\r\n",
+        "  s.beneficiary_bank,\r\n",
+        "  s.beneficiary_bank_country_code,\r\n",
+        "  s.payment_booking_date,\r\n",
+        "  s.payment_booking_system_code,\r\n",
+        "  s.payment_booking_system_concept_id,\r\n",
+        "  s.payment_booking_system_raw_code,\r\n",
+        "  s.payment_booking_system_raw_concept_id,\r\n",
+        "  s.payment_type_code,\r\n",
+        "  s.payment_type_concept_id,\r\n",
+        "  s.payment_type_raw_code,\r\n",
+        "  s.payment_type_raw_concept_id,\r\n",
+        "  s.other_receiver_information,\r\n",
+        "  s.payment_party_id,\r\n",
+        "  s.payment_account_number,\r\n",
+        "  s.payment_source_code,\r\n",
+        "  s.period_start,\r\n",
+        "  s.period_end,\r\n",
+        "  s.load_datetime,\r\n",
+        "  s.record_source_id,\r\n",
+        "  s.data_source_code,\r\n",
+        "  s.data_source_concept_id,\r\n",
+        "  s.data_source_raw_code,\r\n",
+        "  s.data_source_raw_concept_id\r\n",
+        "FROM\r\n",
+        "  demo_banking_silver.qdp_transactions_all.hub_transaction h\r\n",
+        "    JOIN demo_banking_silver.qdp_transactions_all.sat_transaction s\r\n",
+        "      ON h.transaction_id = s.transaction_id\r\n",
+        "    JOIN demo_banking_silver.qdp_refcodes_all.tennant t\r\n",
+        "      ON h.tennant_id = t.tennant_id\r\n",
+        "ORDER BY\r\n",
+        "  s.beneficiary_name"
       ]
     }
   ],
@@ -6614,10 +6798,6 @@
                       "expression": "`tennant_name`"
                     },
                     {
-                      "name": "type_code",
-                      "expression": "`type_code`"
-                    },
-                    {
                       "name": "datetime",
                       "expression": "`datetime`"
                     },
@@ -6626,15 +6806,101 @@
                       "expression": "`amount`"
                     },
                     {
-                      "name": "Orig_Currency",
-                      "expression": "`Orig_Currency`"
+                      "name": "beneficiary_name",
+                      "expression": "`beneficiary_name`"
                     },
                     {
-                      "name": "Bene_Currency",
-                      "expression": "`Bene_Currency`"
+                      "name": "orignator_name",
+                      "expression": "`orignator_name`"
+                    },
+                    {
+                      "name": "original_amount",
+                      "expression": "`original_amount`"
+                    },
+                    {
+                      "name": "account_number",
+                      "expression": "`account_number`"
+                    },
+                    {
+                      "name": "beneficary_currency_code",
+                      "expression": "`beneficary_currency_code`"
+                    },
+                    {
+                      "name": "is_international_transaction",
+                      "expression": "`is_international_transaction`"
+                    },
+                    {
+                      "name": "origator_currency_code",
+                      "expression": "`origator_currency_code`"
+                    },
+                    {
+                      "name": "original_account_number",
+                      "expression": "`original_account_number`"
+                    },
+                    {
+                      "name": "payment_method_code",
+                      "expression": "`payment_method_code`"
+                    },
+                    {
+                      "name": "reference",
+                      "expression": "`reference`"
                     }
                   ],
-                  "disaggregated": true
+                  "disaggregated": true,
+                  "orders": [
+                    {
+                      "direction": "ASC",
+                      "expression": "`tennant_name`"
+                    },
+                    {
+                      "direction": "ASC",
+                      "expression": "`datetime`"
+                    },
+                    {
+                      "direction": "ASC",
+                      "expression": "`amount`"
+                    },
+                    {
+                      "direction": "ASC",
+                      "expression": "`beneficiary_name`"
+                    },
+                    {
+                      "direction": "ASC",
+                      "expression": "`beneficary_currency_code`"
+                    },
+                    {
+                      "direction": "ASC",
+                      "expression": "`orignator_name`"
+                    },
+                    {
+                      "direction": "ASC",
+                      "expression": "`origator_currency_code`"
+                    },
+                    {
+                      "direction": "ASC",
+                      "expression": "`original_amount`"
+                    },
+                    {
+                      "direction": "ASC",
+                      "expression": "`account_number`"
+                    },
+                    {
+                      "direction": "ASC",
+                      "expression": "`original_account_number`"
+                    },
+                    {
+                      "direction": "ASC",
+                      "expression": "`is_international_transaction`"
+                    },
+                    {
+                      "direction": "ASC",
+                      "expression": "`reference`"
+                    },
+                    {
+                      "direction": "DESC",
+                      "expression": "`payment_method_code`"
+                    }
+                  ]
                 }
               }
             ],
@@ -6649,19 +6915,120 @@
                     "fieldName": "tennant_name"
                   },
                   {
-                    "fieldName": "type_code"
-                  },
-                  {
                     "fieldName": "datetime"
                   },
                   {
                     "fieldName": "amount"
                   },
                   {
-                    "fieldName": "Orig_Currency"
+                    "fieldName": "beneficiary_name"
                   },
                   {
-                    "fieldName": "Bene_Currency"
+                    "fieldName": "orignator_name"
+                  },
+                  {
+                    "fieldName": "original_amount"
+                  },
+                  {
+                    "fieldName": "account_number"
+                  },
+                  {
+                    "fieldName": "beneficary_currency_code"
+                  },
+                  {
+                    "fieldName": "is_international_transaction"
+                  },
+                  {
+                    "fieldName": "origator_currency_code"
+                  },
+                  {
+                    "fieldName": "original_account_number"
+                  },
+                  {
+                    "fieldName": "payment_method_code"
+                  },
+                  {
+                    "fieldName": "reference"
+                  }
+                ],
+                "rowOrder": [
+                  {
+                    "by": "column",
+                    "field": {
+                      "index": 0
+                    }
+                  },
+                  {
+                    "by": "column",
+                    "field": {
+                      "index": 1
+                    }
+                  },
+                  {
+                    "by": "column",
+                    "field": {
+                      "index": 2
+                    }
+                  },
+                  {
+                    "by": "column",
+                    "field": {
+                      "index": 3
+                    }
+                  },
+                  {
+                    "by": "column",
+                    "field": {
+                      "index": 7
+                    }
+                  },
+                  {
+                    "by": "column",
+                    "field": {
+                      "index": 4
+                    }
+                  },
+                  {
+                    "by": "column",
+                    "field": {
+                      "index": 9
+                    }
+                  },
+                  {
+                    "by": "column",
+                    "field": {
+                      "index": 5
+                    }
+                  },
+                  {
+                    "by": "column",
+                    "field": {
+                      "index": 6
+                    }
+                  },
+                  {
+                    "by": "column",
+                    "field": {
+                      "index": 10
+                    }
+                  },
+                  {
+                    "by": "column",
+                    "field": {
+                      "index": 8
+                    }
+                  },
+                  {
+                    "by": "column",
+                    "field": {
+                      "index": 12
+                    }
+                  },
+                  {
+                    "by": "column-reversed",
+                    "field": {
+                      "index": 11
+                    }
                   }
                 ]
               },
