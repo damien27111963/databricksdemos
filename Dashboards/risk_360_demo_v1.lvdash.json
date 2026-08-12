@@ -292,7 +292,7 @@
               "dataType": "STRING",
               "values": [
                 {
-                  "value": "Banking Supply Chain Demo"
+                  "value": "Risk 360 Demo"
                 }
               ]
             }
@@ -419,6 +419,7 @@
         "  h.tennant_id,\r\n",
         "\th.individual_entity_id,\r\n",
         "  ihn.full_name,\r\n",
+        "  s.data_source_code,\r\n",
         "\ts.gender_code,\r\n",
         "\ts.birth_date,\r\n",
         "\ts.marital_status_code,\r\n",
@@ -472,7 +473,7 @@
               "dataType": "STRING",
               "values": [
                 {
-                  "value": "Banking Supply Chain Demo"
+                  "value": "Risk 360 Demo"
                 }
               ]
             }
@@ -853,6 +854,31 @@
         "      ON h.tennant_id = t.tennant_id\r\n",
         "ORDER BY\r\n",
         "  s.beneficiary_name"
+      ]
+    },
+    {
+      "name": "8b970e99",
+      "displayName": "cust_cash_flow_3",
+      "queryLines": [
+        "SELECT * FROM demo_banking_gold.qdp_banking_supply_chain.fact_cust_cash_flow_3\r\n",
+        "WHERE tennant_name = :p_tennant_name;"
+      ],
+      "parameters": [
+        {
+          "displayName": "p_tennant_name",
+          "keyword": "p_tennant_name",
+          "dataType": "STRING",
+          "defaultSelection": {
+            "values": {
+              "dataType": "STRING",
+              "values": [
+                {
+                  "value": "Risk 360 Demo"
+                }
+              ]
+            }
+          }
+        }
       ]
     }
   ],
@@ -2031,7 +2057,7 @@
     },
     {
       "name": "a417499a",
-      "displayName": "cash flow all",
+      "displayName": "Cash Flow All",
       "layout": [
         {
           "widget": {
@@ -2402,8 +2428,383 @@
       "layoutVersion": "GRID_V1"
     },
     {
+      "name": "342637cc",
+      "displayName": "Cash Flow Customers",
+      "layout": [
+        {
+          "widget": {
+            "name": "e9175017",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "8b970e99",
+                  "fields": [
+                    {
+                      "name": "stage1",
+                      "expression": "`stage1`"
+                    },
+                    {
+                      "name": "stage2",
+                      "expression": "`stage2`"
+                    },
+                    {
+                      "name": "stage3",
+                      "expression": "`stage3`"
+                    },
+                    {
+                      "name": "value",
+                      "expression": "`value`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 1,
+              "widgetType": "sankey",
+              "encodings": {
+                "value": {
+                  "fieldName": "value",
+                  "displayName": "value"
+                },
+                "stages": [
+                  {
+                    "fieldName": "stage1",
+                    "displayName": "stage1"
+                  },
+                  {
+                    "fieldName": "stage2",
+                    "displayName": "stage2"
+                  },
+                  {
+                    "fieldName": "stage3",
+                    "displayName": "stage3"
+                  }
+                ]
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 2,
+            "width": 12,
+            "height": 11
+          }
+        },
+        {
+          "widget": {
+            "name": "3802d6e0",
+            "multilineTextboxSpec": {
+              "lines": [
+                "![](https://www.quantexa.com/images/quantexa.svg)"
+              ]
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 2,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "87531e42",
+            "multilineTextboxSpec": {
+              "lines": [
+                "# Cash Flow"
+              ]
+            }
+          },
+          "position": {
+            "x": 2,
+            "y": 0,
+            "width": 6,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "ce21e996",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "0879f187",
+                  "fields": [
+                    {
+                      "name": "count(data_source_code)",
+                      "expression": "COUNT(`data_source_code`)"
+                    },
+                    {
+                      "name": "data_source_code",
+                      "expression": "`data_source_code`"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "widgetType": "pie",
+              "encodings": {
+                "angle": {
+                  "fieldName": "count(data_source_code)",
+                  "scale": {
+                    "type": "quantitative"
+                  },
+                  "displayName": "Organisations Known to the Network"
+                },
+                "color": {
+                  "fieldName": "data_source_code",
+                  "scale": {
+                    "type": "categorical"
+                  },
+                  "displayName": "data_source_code"
+                },
+                "label": {
+                  "show": true
+                }
+              },
+              "frame": {
+                "showTitle": true,
+                "title": "Customers, Transaction Originators and Transaction Beneficiaries"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 13,
+            "width": 3,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "89d823bb",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "0879f187",
+                  "fields": [
+                    {
+                      "name": "organisation_name",
+                      "expression": "`organisation_name`"
+                    }
+                  ],
+                  "filters": [
+                    {
+                      "expression": "`data_source_code` IN ('CUSTOMER')"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "frame": {
+                "showTitle": true,
+                "title": "Customers"
+              },
+              "rowsPerPage": 25,
+              "displayRowNumbers": false,
+              "widgetType": "table",
+              "encodings": {
+                "columns": [
+                  {
+                    "fieldName": "organisation_name",
+                    "useForSearch": false,
+                    "displayName": "Organisation",
+                    "actions": {
+                      "hover": {
+                        "type": "tooltip",
+                        "tooltipTemplate": "{{ @ }}"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "position": {
+            "x": 3,
+            "y": 13,
+            "width": 2,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "c155caa5",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "db85ebcf",
+                  "fields": [
+                    {
+                      "name": "organisationName",
+                      "expression": "`organisationName`"
+                    }
+                  ],
+                  "filters": [
+                    {
+                      "expression": "`organisationName` IN (`organisationName`) OR TRUE"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "frame": {
+                "showTitle": true,
+                "title": "Beneficiary of Transactions"
+              },
+              "rowsPerPage": 25,
+              "displayRowNumbers": false,
+              "widgetType": "table",
+              "encodings": {
+                "columns": [
+                  {
+                    "fieldName": "organisationName",
+                    "displayName": "Organisation"
+                  }
+                ]
+              }
+            }
+          },
+          "position": {
+            "x": 7,
+            "y": 13,
+            "width": 2,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "8046399e",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "0879f187",
+                  "fields": [
+                    {
+                      "name": "organisation_name",
+                      "expression": "`organisation_name`"
+                    }
+                  ],
+                  "filters": [
+                    {
+                      "expression": "`data_source_code` IN ('ORIGINATOR TRANSACTION')"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "frame": {
+                "showTitle": true,
+                "title": "Originator of Transactions"
+              },
+              "rowsPerPage": 25,
+              "displayRowNumbers": false,
+              "widgetType": "table",
+              "encodings": {
+                "columns": [
+                  {
+                    "fieldName": "organisation_name",
+                    "useForSearch": false,
+                    "displayName": "Organisation",
+                    "actions": {
+                      "hover": {
+                        "type": "tooltip",
+                        "tooltipTemplate": "{{ @ }}"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "position": {
+            "x": 5,
+            "y": 13,
+            "width": 2,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "985fa7f1",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "13ffa0da",
+                  "fields": [
+                    {
+                      "name": "organisation_name",
+                      "expression": "`organisation_name`"
+                    },
+                    {
+                      "name": "company_registration_country_code",
+                      "expression": "`company_registration_country_code`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "rowsPerPage": 25,
+              "displayRowNumbers": false,
+              "frame": {
+                "showTitle": true,
+                "title": "High Risk Countries"
+              },
+              "widgetType": "table",
+              "encodings": {
+                "columns": [
+                  {
+                    "fieldName": "organisation_name",
+                    "displayName": "Organisation"
+                  },
+                  {
+                    "fieldName": "company_registration_country_code",
+                    "displayName": "Country"
+                  }
+                ]
+              }
+            }
+          },
+          "position": {
+            "x": 9,
+            "y": 13,
+            "width": 3,
+            "height": 6
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_CANVAS",
+      "layoutVersion": "GRID_V1"
+    },
+    {
       "name": "ecc17fd8",
-      "displayName": "beneficiaries all",
+      "displayName": "Beneficiaries All",
       "layout": [
         {
           "widget": {
@@ -2455,7 +2856,7 @@
           "position": {
             "x": 0,
             "y": 2,
-            "width": 6,
+            "width": 12,
             "height": 14
           }
         },
@@ -2471,7 +2872,7 @@
           "position": {
             "x": 0,
             "y": 0,
-            "width": 1,
+            "width": 2,
             "height": 2
           }
         },
@@ -2485,9 +2886,9 @@
             }
           },
           "position": {
-            "x": 1,
+            "x": 2,
             "y": 0,
-            "width": 3,
+            "width": 6,
             "height": 2
           }
         },
@@ -2544,7 +2945,7 @@
           "position": {
             "x": 0,
             "y": 16,
-            "width": 3,
+            "width": 6,
             "height": 6
           }
         },
@@ -2670,9 +3071,9 @@
             }
           },
           "position": {
-            "x": 3,
+            "x": 6,
             "y": 16,
-            "width": 1,
+            "width": 2,
             "height": 6
           }
         },
@@ -2798,9 +3199,9 @@
             }
           },
           "position": {
-            "x": 4,
+            "x": 8,
             "y": 16,
-            "width": 1,
+            "width": 2,
             "height": 6
           }
         },
@@ -2926,18 +3327,19 @@
             }
           },
           "position": {
-            "x": 5,
+            "x": 10,
             "y": 16,
-            "width": 1,
+            "width": 2,
             "height": 6
           }
         }
       ],
-      "pageType": "PAGE_TYPE_CANVAS"
+      "pageType": "PAGE_TYPE_CANVAS",
+      "layoutVersion": "GRID_V1"
     },
     {
       "name": "b427393e",
-      "displayName": "monies in with bar chart",
+      "displayName": "Monies In with Bar Chart",
       "layout": [
         {
           "widget": {
@@ -3065,7 +3467,7 @@
           "position": {
             "x": 0,
             "y": 9,
-            "width": 3,
+            "width": 6,
             "height": 6
           }
         },
@@ -3128,7 +3530,7 @@
           "position": {
             "x": 0,
             "y": 3,
-            "width": 4,
+            "width": 8,
             "height": 6
           }
         },
@@ -3256,9 +3658,9 @@
             }
           },
           "position": {
-            "x": 3,
+            "x": 6,
             "y": 9,
-            "width": 3,
+            "width": 6,
             "height": 6
           }
         },
@@ -3357,7 +3759,7 @@
           "position": {
             "x": 0,
             "y": 2,
-            "width": 3,
+            "width": 6,
             "height": 1
           }
         },
@@ -3371,9 +3773,9 @@
             }
           },
           "position": {
-            "x": 1,
+            "x": 2,
             "y": 0,
-            "width": 3,
+            "width": 6,
             "height": 2
           }
         },
@@ -3389,7 +3791,7 @@
           "position": {
             "x": 0,
             "y": 0,
-            "width": 1,
+            "width": 2,
             "height": 2
           }
         },
@@ -3533,9 +3935,9 @@
             }
           },
           "position": {
-            "x": 4,
+            "x": 8,
             "y": 3,
-            "width": 2,
+            "width": 4,
             "height": 6
           }
         },
@@ -3923,12 +4325,13 @@
           "position": {
             "x": 0,
             "y": 15,
-            "width": 6,
+            "width": 12,
             "height": 11
           }
         }
       ],
-      "pageType": "PAGE_TYPE_CANVAS"
+      "pageType": "PAGE_TYPE_CANVAS",
+      "layoutVersion": "GRID_V1"
     },
     {
       "name": "2a61eb3d",
@@ -4498,6 +4901,10 @@
                       "expression": "`individual_entity_id`"
                     },
                     {
+                      "name": "data_source_code",
+                      "expression": "`data_source_code`"
+                    },
+                    {
                       "name": "full_name",
                       "expression": "`full_name`"
                     },
@@ -4591,872 +4998,285 @@
               }
             ],
             "spec": {
-              "version": 1,
+              "version": 2,
+              "rowsPerPage": 25,
+              "displayRowNumbers": true,
               "widgetType": "table",
               "encodings": {
                 "columns": [
                   {
                     "fieldName": "individual_entity_id",
-                    "booleanValues": [
-                      "false",
-                      "true"
-                    ],
-                    "imageUrlTemplate": "{{ @ }}",
-                    "imageTitleTemplate": "{{ @ }}",
-                    "imageWidth": "",
-                    "imageHeight": "",
-                    "linkUrlTemplate": "{{ @ }}",
-                    "linkTextTemplate": "{{ @ }}",
-                    "linkTitleTemplate": "{{ @ }}",
-                    "linkOpenInNewTab": true,
-                    "type": "string",
-                    "displayAs": "string",
-                    "visible": true,
-                    "order": 100001,
-                    "title": "Individual Id",
-                    "allowSearch": false,
-                    "alignContent": "left",
-                    "allowHTML": false,
-                    "highlightLinks": false,
-                    "useMonospaceFont": false,
-                    "preserveWhitespace": false
+                    "useForSearch": false,
+                    "displayName": "Individual Id",
+                    "actions": {
+                      "hover": {
+                        "type": "tooltip",
+                        "tooltipTemplate": "{{ @ }}"
+                      }
+                    }
+                  },
+                  {
+                    "fieldName": "data_source_code",
+                    "displayName": "Data Source"
                   },
                   {
                     "fieldName": "full_name",
-                    "booleanValues": [
-                      "false",
-                      "true"
-                    ],
-                    "imageUrlTemplate": "{{ @ }}",
-                    "imageTitleTemplate": "{{ @ }}",
-                    "imageWidth": "",
-                    "imageHeight": "",
-                    "linkUrlTemplate": "{{ @ }}",
-                    "linkTextTemplate": "{{ @ }}",
-                    "linkTitleTemplate": "{{ @ }}",
-                    "linkOpenInNewTab": true,
-                    "type": "string",
-                    "displayAs": "string",
-                    "visible": true,
-                    "order": 100002,
-                    "title": "Full Name",
-                    "allowSearch": false,
-                    "alignContent": "left",
-                    "allowHTML": false,
-                    "highlightLinks": false,
-                    "useMonospaceFont": false,
-                    "preserveWhitespace": false
+                    "useForSearch": false,
+                    "displayName": "Full Name",
+                    "actions": {
+                      "hover": {
+                        "type": "tooltip",
+                        "tooltipTemplate": "{{ @ }}"
+                      }
+                    }
                   },
                   {
                     "fieldName": "gender_code",
-                    "booleanValues": [
-                      "false",
-                      "true"
-                    ],
-                    "imageUrlTemplate": "{{ @ }}",
-                    "imageTitleTemplate": "{{ @ }}",
-                    "imageWidth": "",
-                    "imageHeight": "",
-                    "linkUrlTemplate": "{{ @ }}",
-                    "linkTextTemplate": "{{ @ }}",
-                    "linkTitleTemplate": "{{ @ }}",
-                    "linkOpenInNewTab": true,
-                    "type": "string",
-                    "displayAs": "string",
-                    "visible": true,
-                    "order": 100003,
-                    "title": "Gender",
-                    "allowSearch": false,
-                    "alignContent": "left",
-                    "allowHTML": false,
-                    "highlightLinks": false,
-                    "useMonospaceFont": false,
-                    "preserveWhitespace": false
+                    "useForSearch": false,
+                    "displayName": "Gender",
+                    "actions": {
+                      "hover": {
+                        "type": "tooltip",
+                        "tooltipTemplate": "{{ @ }}"
+                      }
+                    }
                   },
                   {
                     "fieldName": "birth_date",
-                    "dateTimeFormat": "DD/MM/YYYY",
-                    "booleanValues": [
-                      "false",
-                      "true"
-                    ],
-                    "imageUrlTemplate": "{{ @ }}",
-                    "imageTitleTemplate": "{{ @ }}",
-                    "imageWidth": "",
-                    "imageHeight": "",
-                    "linkUrlTemplate": "{{ @ }}",
-                    "linkTextTemplate": "{{ @ }}",
-                    "linkTitleTemplate": "{{ @ }}",
-                    "linkOpenInNewTab": true,
-                    "type": "date",
-                    "displayAs": "datetime",
-                    "visible": true,
-                    "order": 100004,
-                    "title": "Date of Birth",
-                    "allowSearch": false,
-                    "alignContent": "right",
-                    "allowHTML": false,
-                    "highlightLinks": false,
-                    "useMonospaceFont": false,
-                    "preserveWhitespace": false
+                    "useForSearch": false,
+                    "contentAlignment": "right",
+                    "format": {
+                      "type": "moment.js",
+                      "format": "DD/MM/YYYY"
+                    },
+                    "displayName": "Date of Birth",
+                    "actions": {
+                      "hover": {
+                        "type": "tooltip",
+                        "tooltipTemplate": "{{ @ }}"
+                      }
+                    }
                   },
                   {
                     "fieldName": "nationality_code",
-                    "booleanValues": [
-                      "false",
-                      "true"
-                    ],
-                    "imageUrlTemplate": "{{ @ }}",
-                    "imageTitleTemplate": "{{ @ }}",
-                    "imageWidth": "",
-                    "imageHeight": "",
-                    "linkUrlTemplate": "{{ @ }}",
-                    "linkTextTemplate": "{{ @ }}",
-                    "linkTitleTemplate": "{{ @ }}",
-                    "linkOpenInNewTab": true,
-                    "type": "string",
-                    "displayAs": "string",
-                    "visible": true,
-                    "order": 100006,
-                    "title": "Nationality",
-                    "allowSearch": false,
-                    "alignContent": "left",
-                    "allowHTML": false,
-                    "highlightLinks": false,
-                    "useMonospaceFont": false,
-                    "preserveWhitespace": false
+                    "useForSearch": false,
+                    "displayName": "Nationality",
+                    "actions": {
+                      "hover": {
+                        "type": "tooltip",
+                        "tooltipTemplate": "{{ @ }}"
+                      }
+                    }
                   },
                   {
                     "fieldName": "name_use_code",
-                    "booleanValues": [
-                      "false",
-                      "true"
-                    ],
-                    "imageUrlTemplate": "{{ @ }}",
-                    "imageTitleTemplate": "{{ @ }}",
-                    "imageWidth": "",
-                    "imageHeight": "",
-                    "linkUrlTemplate": "{{ @ }}",
-                    "linkTextTemplate": "{{ @ }}",
-                    "linkTitleTemplate": "{{ @ }}",
-                    "linkOpenInNewTab": true,
-                    "type": "string",
-                    "displayAs": "string",
-                    "visible": true,
-                    "order": 100009,
-                    "title": "Name Use",
-                    "allowSearch": false,
-                    "alignContent": "left",
-                    "allowHTML": false,
-                    "highlightLinks": false,
-                    "useMonospaceFont": false,
-                    "preserveWhitespace": false
+                    "useForSearch": false,
+                    "displayName": "Name Use",
+                    "actions": {
+                      "hover": {
+                        "type": "tooltip",
+                        "tooltipTemplate": "{{ @ }}"
+                      }
+                    }
                   },
                   {
                     "fieldName": "given_name_1",
-                    "booleanValues": [
-                      "false",
-                      "true"
-                    ],
-                    "imageUrlTemplate": "{{ @ }}",
-                    "imageTitleTemplate": "{{ @ }}",
-                    "imageWidth": "",
-                    "imageHeight": "",
-                    "linkUrlTemplate": "{{ @ }}",
-                    "linkTextTemplate": "{{ @ }}",
-                    "linkTitleTemplate": "{{ @ }}",
-                    "linkOpenInNewTab": true,
-                    "type": "string",
-                    "displayAs": "string",
-                    "visible": true,
-                    "order": 100010,
-                    "title": "Given Name 1",
-                    "allowSearch": false,
-                    "alignContent": "left",
-                    "allowHTML": false,
-                    "highlightLinks": false,
-                    "useMonospaceFont": false,
-                    "preserveWhitespace": false
+                    "useForSearch": false,
+                    "displayName": "Given Name 1",
+                    "actions": {
+                      "hover": {
+                        "type": "tooltip",
+                        "tooltipTemplate": "{{ @ }}"
+                      }
+                    }
                   },
                   {
                     "fieldName": "given_name_2",
-                    "booleanValues": [
-                      "false",
-                      "true"
-                    ],
-                    "imageUrlTemplate": "{{ @ }}",
-                    "imageTitleTemplate": "{{ @ }}",
-                    "imageWidth": "",
-                    "imageHeight": "",
-                    "linkUrlTemplate": "{{ @ }}",
-                    "linkTextTemplate": "{{ @ }}",
-                    "linkTitleTemplate": "{{ @ }}",
-                    "linkOpenInNewTab": true,
-                    "type": "string",
-                    "displayAs": "string",
-                    "visible": true,
-                    "order": 100011,
-                    "title": "Given Name 2",
-                    "allowSearch": false,
-                    "alignContent": "left",
-                    "allowHTML": false,
-                    "highlightLinks": false,
-                    "useMonospaceFont": false,
-                    "preserveWhitespace": false
+                    "useForSearch": false,
+                    "displayName": "Given Name 2",
+                    "actions": {
+                      "hover": {
+                        "type": "tooltip",
+                        "tooltipTemplate": "{{ @ }}"
+                      }
+                    }
                   },
                   {
                     "fieldName": "family_name",
-                    "booleanValues": [
-                      "false",
-                      "true"
-                    ],
-                    "imageUrlTemplate": "{{ @ }}",
-                    "imageTitleTemplate": "{{ @ }}",
-                    "imageWidth": "",
-                    "imageHeight": "",
-                    "linkUrlTemplate": "{{ @ }}",
-                    "linkTextTemplate": "{{ @ }}",
-                    "linkTitleTemplate": "{{ @ }}",
-                    "linkOpenInNewTab": true,
-                    "type": "string",
-                    "displayAs": "string",
-                    "visible": true,
-                    "order": 100015,
-                    "title": "Family Name",
-                    "allowSearch": false,
-                    "alignContent": "left",
-                    "allowHTML": false,
-                    "highlightLinks": false,
-                    "useMonospaceFont": false,
-                    "preserveWhitespace": false
+                    "useForSearch": false,
+                    "displayName": "Family Name",
+                    "actions": {
+                      "hover": {
+                        "type": "tooltip",
+                        "tooltipTemplate": "{{ @ }}"
+                      }
+                    }
                   },
                   {
                     "fieldName": "initials",
-                    "booleanValues": [
-                      "false",
-                      "true"
-                    ],
-                    "imageUrlTemplate": "{{ @ }}",
-                    "imageTitleTemplate": "{{ @ }}",
-                    "imageWidth": "",
-                    "imageHeight": "",
-                    "linkUrlTemplate": "{{ @ }}",
-                    "linkTextTemplate": "{{ @ }}",
-                    "linkTitleTemplate": "{{ @ }}",
-                    "linkOpenInNewTab": true,
-                    "type": "string",
-                    "displayAs": "string",
-                    "visible": true,
-                    "order": 100016,
-                    "title": "Initials",
-                    "allowSearch": false,
-                    "alignContent": "left",
-                    "allowHTML": false,
-                    "highlightLinks": false,
-                    "useMonospaceFont": false,
-                    "preserveWhitespace": false
+                    "useForSearch": false,
+                    "displayName": "Initials",
+                    "actions": {
+                      "hover": {
+                        "type": "tooltip",
+                        "tooltipTemplate": "{{ @ }}"
+                      }
+                    }
                   },
                   {
                     "fieldName": "is_deceased",
-                    "booleanValues": [
-                      "false",
-                      "true"
-                    ],
-                    "imageUrlTemplate": "{{ @ }}",
-                    "imageTitleTemplate": "{{ @ }}",
-                    "imageWidth": "",
-                    "imageHeight": "",
-                    "linkUrlTemplate": "{{ @ }}",
-                    "linkTextTemplate": "{{ @ }}",
-                    "linkTitleTemplate": "{{ @ }}",
-                    "linkOpenInNewTab": true,
-                    "type": "boolean",
-                    "displayAs": "boolean",
-                    "visible": true,
-                    "order": 100018,
-                    "title": "Is Deceased",
-                    "allowSearch": false,
-                    "alignContent": "right",
-                    "allowHTML": false,
-                    "highlightLinks": false,
-                    "useMonospaceFont": false,
-                    "preserveWhitespace": false
+                    "useForSearch": false,
+                    "contentAlignment": "right",
+                    "displayName": "Is Deceased",
+                    "actions": {
+                      "hover": {
+                        "type": "tooltip",
+                        "tooltipTemplate": "{{ @ }}"
+                      }
+                    }
                   },
                   {
                     "fieldName": "deceased_datetime",
-                    "dateTimeFormat": "DD/MM/YYYY HH:mm:ss.SSS",
-                    "booleanValues": [
-                      "false",
-                      "true"
-                    ],
-                    "imageUrlTemplate": "{{ @ }}",
-                    "imageTitleTemplate": "{{ @ }}",
-                    "imageWidth": "",
-                    "imageHeight": "",
-                    "linkUrlTemplate": "{{ @ }}",
-                    "linkTextTemplate": "{{ @ }}",
-                    "linkTitleTemplate": "{{ @ }}",
-                    "linkOpenInNewTab": true,
-                    "type": "datetime",
-                    "displayAs": "datetime",
-                    "visible": true,
-                    "order": 100019,
-                    "title": "Deceased Datetime",
-                    "allowSearch": false,
-                    "alignContent": "right",
-                    "allowHTML": false,
-                    "highlightLinks": false,
-                    "useMonospaceFont": false,
-                    "preserveWhitespace": false
+                    "useForSearch": false,
+                    "contentAlignment": "right",
+                    "format": {
+                      "type": "moment.js",
+                      "format": "DD/MM/YYYY HH:mm:ss.SSS"
+                    },
+                    "displayName": "Deceased Datetime",
+                    "actions": {
+                      "hover": {
+                        "type": "tooltip",
+                        "tooltipTemplate": "{{ @ }}"
+                      }
+                    }
                   },
                   {
                     "fieldName": "ethnicity_code",
-                    "booleanValues": [
-                      "false",
-                      "true"
-                    ],
-                    "imageUrlTemplate": "{{ @ }}",
-                    "imageTitleTemplate": "{{ @ }}",
-                    "imageWidth": "",
-                    "imageHeight": "",
-                    "linkUrlTemplate": "{{ @ }}",
-                    "linkTextTemplate": "{{ @ }}",
-                    "linkTitleTemplate": "{{ @ }}",
-                    "linkOpenInNewTab": true,
-                    "type": "string",
-                    "displayAs": "string",
-                    "visible": true,
-                    "order": 100020,
-                    "title": "Ethnicity",
-                    "allowSearch": false,
-                    "alignContent": "left",
-                    "allowHTML": false,
-                    "highlightLinks": false,
-                    "useMonospaceFont": false,
-                    "preserveWhitespace": false
+                    "useForSearch": false,
+                    "displayName": "Ethnicity",
+                    "actions": {
+                      "hover": {
+                        "type": "tooltip",
+                        "tooltipTemplate": "{{ @ }}"
+                      }
+                    }
                   },
                   {
                     "fieldName": "religion_code",
-                    "booleanValues": [
-                      "false",
-                      "true"
-                    ],
-                    "imageUrlTemplate": "{{ @ }}",
-                    "imageTitleTemplate": "{{ @ }}",
-                    "imageWidth": "",
-                    "imageHeight": "",
-                    "linkUrlTemplate": "{{ @ }}",
-                    "linkTextTemplate": "{{ @ }}",
-                    "linkTitleTemplate": "{{ @ }}",
-                    "linkOpenInNewTab": true,
-                    "type": "string",
-                    "displayAs": "string",
-                    "visible": true,
-                    "order": 100021,
-                    "title": "Religion",
-                    "allowSearch": false,
-                    "alignContent": "left",
-                    "allowHTML": false,
-                    "highlightLinks": false,
-                    "useMonospaceFont": false,
-                    "preserveWhitespace": false
+                    "useForSearch": false,
+                    "displayName": "Religion",
+                    "actions": {
+                      "hover": {
+                        "type": "tooltip",
+                        "tooltipTemplate": "{{ @ }}"
+                      }
+                    }
                   },
                   {
                     "fieldName": "occupation_code",
-                    "booleanValues": [
-                      "false",
-                      "true"
-                    ],
-                    "imageUrlTemplate": "{{ @ }}",
-                    "imageTitleTemplate": "{{ @ }}",
-                    "imageWidth": "",
-                    "imageHeight": "",
-                    "linkUrlTemplate": "{{ @ }}",
-                    "linkTextTemplate": "{{ @ }}",
-                    "linkTitleTemplate": "{{ @ }}",
-                    "linkOpenInNewTab": true,
-                    "type": "string",
-                    "displayAs": "string",
-                    "visible": true,
-                    "order": 100022,
-                    "title": "Occupation Code",
-                    "allowSearch": false,
-                    "alignContent": "left",
-                    "allowHTML": false,
-                    "highlightLinks": false,
-                    "useMonospaceFont": false,
-                    "preserveWhitespace": false
+                    "useForSearch": false,
+                    "displayName": "Occupation Code",
+                    "actions": {
+                      "hover": {
+                        "type": "tooltip",
+                        "tooltipTemplate": "{{ @ }}"
+                      }
+                    }
                   },
                   {
                     "fieldName": "is_employee",
-                    "booleanValues": [
-                      "false",
-                      "true"
-                    ],
-                    "imageUrlTemplate": "{{ @ }}",
-                    "imageTitleTemplate": "{{ @ }}",
-                    "imageWidth": "",
-                    "imageHeight": "",
-                    "linkUrlTemplate": "{{ @ }}",
-                    "linkTextTemplate": "{{ @ }}",
-                    "linkTitleTemplate": "{{ @ }}",
-                    "linkOpenInNewTab": true,
-                    "type": "boolean",
-                    "displayAs": "boolean",
-                    "visible": true,
-                    "order": 100023,
-                    "title": "is_employee",
-                    "allowSearch": false,
-                    "alignContent": "right",
-                    "allowHTML": false,
-                    "highlightLinks": false,
-                    "useMonospaceFont": false,
-                    "preserveWhitespace": false
+                    "useForSearch": false,
+                    "contentAlignment": "right",
+                    "actions": {
+                      "hover": {
+                        "type": "tooltip",
+                        "tooltipTemplate": "{{ @ }}"
+                      }
+                    }
                   },
                   {
                     "fieldName": "is_ex_employee",
-                    "booleanValues": [
-                      "false",
-                      "true"
-                    ],
-                    "imageUrlTemplate": "{{ @ }}",
-                    "imageTitleTemplate": "{{ @ }}",
-                    "imageWidth": "",
-                    "imageHeight": "",
-                    "linkUrlTemplate": "{{ @ }}",
-                    "linkTextTemplate": "{{ @ }}",
-                    "linkTitleTemplate": "{{ @ }}",
-                    "linkOpenInNewTab": true,
-                    "type": "boolean",
-                    "displayAs": "boolean",
-                    "visible": true,
-                    "order": 100024,
-                    "title": "is_ex_employee",
-                    "allowSearch": false,
-                    "alignContent": "right",
-                    "allowHTML": false,
-                    "highlightLinks": false,
-                    "useMonospaceFont": false,
-                    "preserveWhitespace": false
+                    "useForSearch": false,
+                    "contentAlignment": "right",
+                    "actions": {
+                      "hover": {
+                        "type": "tooltip",
+                        "tooltipTemplate": "{{ @ }}"
+                      }
+                    }
                   },
                   {
                     "fieldName": "is_graduate",
-                    "booleanValues": [
-                      "false",
-                      "true"
-                    ],
-                    "imageUrlTemplate": "{{ @ }}",
-                    "imageTitleTemplate": "{{ @ }}",
-                    "imageWidth": "",
-                    "imageHeight": "",
-                    "linkUrlTemplate": "{{ @ }}",
-                    "linkTextTemplate": "{{ @ }}",
-                    "linkTitleTemplate": "{{ @ }}",
-                    "linkOpenInNewTab": true,
-                    "type": "boolean",
-                    "displayAs": "boolean",
-                    "visible": true,
-                    "order": 100025,
-                    "title": "is_graduate",
-                    "allowSearch": false,
-                    "alignContent": "right",
-                    "allowHTML": false,
-                    "highlightLinks": false,
-                    "useMonospaceFont": false,
-                    "preserveWhitespace": false
+                    "useForSearch": false,
+                    "contentAlignment": "right",
+                    "actions": {
+                      "hover": {
+                        "type": "tooltip",
+                        "tooltipTemplate": "{{ @ }}"
+                      }
+                    }
                   },
                   {
                     "fieldName": "is_interpreter_required",
-                    "booleanValues": [
-                      "false",
-                      "true"
-                    ],
-                    "imageUrlTemplate": "{{ @ }}",
-                    "imageTitleTemplate": "{{ @ }}",
-                    "imageWidth": "",
-                    "imageHeight": "",
-                    "linkUrlTemplate": "{{ @ }}",
-                    "linkTextTemplate": "{{ @ }}",
-                    "linkTitleTemplate": "{{ @ }}",
-                    "linkOpenInNewTab": true,
-                    "type": "boolean",
-                    "displayAs": "boolean",
-                    "visible": true,
-                    "order": 100026,
-                    "title": "is_interpreter_required",
-                    "allowSearch": false,
-                    "alignContent": "right",
-                    "allowHTML": false,
-                    "highlightLinks": false,
-                    "useMonospaceFont": false,
-                    "preserveWhitespace": false
+                    "useForSearch": false,
+                    "contentAlignment": "right",
+                    "actions": {
+                      "hover": {
+                        "type": "tooltip",
+                        "tooltipTemplate": "{{ @ }}"
+                      }
+                    }
                   },
                   {
                     "fieldName": "is_employed",
-                    "booleanValues": [
-                      "false",
-                      "true"
-                    ],
-                    "imageUrlTemplate": "{{ @ }}",
-                    "imageTitleTemplate": "{{ @ }}",
-                    "imageWidth": "",
-                    "imageHeight": "",
-                    "linkUrlTemplate": "{{ @ }}",
-                    "linkTextTemplate": "{{ @ }}",
-                    "linkTitleTemplate": "{{ @ }}",
-                    "linkOpenInNewTab": true,
-                    "type": "boolean",
-                    "displayAs": "boolean",
-                    "visible": true,
-                    "order": 100027,
-                    "title": "is_employed",
-                    "allowSearch": false,
-                    "alignContent": "right",
-                    "allowHTML": false,
-                    "highlightLinks": false,
-                    "useMonospaceFont": false,
-                    "preserveWhitespace": false
+                    "useForSearch": false,
+                    "contentAlignment": "right",
+                    "actions": {
+                      "hover": {
+                        "type": "tooltip",
+                        "tooltipTemplate": "{{ @ }}"
+                      }
+                    }
                   },
                   {
                     "fieldName": "is_retired",
-                    "booleanValues": [
-                      "false",
-                      "true"
-                    ],
-                    "imageUrlTemplate": "{{ @ }}",
-                    "imageTitleTemplate": "{{ @ }}",
-                    "imageWidth": "",
-                    "imageHeight": "",
-                    "linkUrlTemplate": "{{ @ }}",
-                    "linkTextTemplate": "{{ @ }}",
-                    "linkTitleTemplate": "{{ @ }}",
-                    "linkOpenInNewTab": true,
-                    "type": "boolean",
-                    "displayAs": "boolean",
-                    "visible": true,
-                    "order": 100028,
-                    "title": "is_retired",
-                    "allowSearch": false,
-                    "alignContent": "right",
-                    "allowHTML": false,
-                    "highlightLinks": false,
-                    "useMonospaceFont": false,
-                    "preserveWhitespace": false
+                    "useForSearch": false,
+                    "contentAlignment": "right",
+                    "actions": {
+                      "hover": {
+                        "type": "tooltip",
+                        "tooltipTemplate": "{{ @ }}"
+                      }
+                    }
                   },
                   {
                     "fieldName": "is_student",
-                    "booleanValues": [
-                      "false",
-                      "true"
-                    ],
-                    "imageUrlTemplate": "{{ @ }}",
-                    "imageTitleTemplate": "{{ @ }}",
-                    "imageWidth": "",
-                    "imageHeight": "",
-                    "linkUrlTemplate": "{{ @ }}",
-                    "linkTextTemplate": "{{ @ }}",
-                    "linkTitleTemplate": "{{ @ }}",
-                    "linkOpenInNewTab": true,
-                    "type": "boolean",
-                    "displayAs": "boolean",
-                    "visible": true,
-                    "order": 100029,
-                    "title": "is_student",
-                    "allowSearch": false,
-                    "alignContent": "right",
-                    "allowHTML": false,
-                    "highlightLinks": false,
-                    "useMonospaceFont": false,
-                    "preserveWhitespace": false
+                    "useForSearch": false,
+                    "contentAlignment": "right",
+                    "actions": {
+                      "hover": {
+                        "type": "tooltip",
+                        "tooltipTemplate": "{{ @ }}"
+                      }
+                    }
                   },
                   {
                     "fieldName": "is_individual_merged",
-                    "booleanValues": [
-                      "false",
-                      "true"
-                    ],
-                    "imageUrlTemplate": "{{ @ }}",
-                    "imageTitleTemplate": "{{ @ }}",
-                    "imageWidth": "",
-                    "imageHeight": "",
-                    "linkUrlTemplate": "{{ @ }}",
-                    "linkTextTemplate": "{{ @ }}",
-                    "linkTitleTemplate": "{{ @ }}",
-                    "linkOpenInNewTab": true,
-                    "type": "boolean",
-                    "displayAs": "boolean",
-                    "visible": true,
-                    "order": 100030,
-                    "title": "is_individual_merged",
-                    "allowSearch": false,
-                    "alignContent": "right",
-                    "allowHTML": false,
-                    "highlightLinks": false,
-                    "useMonospaceFont": false,
-                    "preserveWhitespace": false
+                    "useForSearch": false,
+                    "contentAlignment": "right",
+                    "actions": {
+                      "hover": {
+                        "type": "tooltip",
+                        "tooltipTemplate": "{{ @ }}"
+                      }
+                    }
                   }
                 ]
               },
-              "invisibleColumns": [
-                {
-                  "numberFormat": "0",
-                  "booleanValues": [
-                    "false",
-                    "true"
-                  ],
-                  "imageUrlTemplate": "{{ @ }}",
-                  "imageTitleTemplate": "{{ @ }}",
-                  "imageWidth": "",
-                  "imageHeight": "",
-                  "linkUrlTemplate": "{{ @ }}",
-                  "linkTextTemplate": "{{ @ }}",
-                  "linkTitleTemplate": "{{ @ }}",
-                  "linkOpenInNewTab": true,
-                  "name": "tennant_id",
-                  "type": "integer",
-                  "displayAs": "number",
-                  "order": 100000,
-                  "title": "tennant_id",
-                  "allowSearch": false,
-                  "alignContent": "right",
-                  "allowHTML": false,
-                  "highlightLinks": false,
-                  "useMonospaceFont": false,
-                  "preserveWhitespace": false
-                },
-                {
-                  "booleanValues": [
-                    "false",
-                    "true"
-                  ],
-                  "imageUrlTemplate": "{{ @ }}",
-                  "imageTitleTemplate": "{{ @ }}",
-                  "imageWidth": "",
-                  "imageHeight": "",
-                  "linkUrlTemplate": "{{ @ }}",
-                  "linkTextTemplate": "{{ @ }}",
-                  "linkTitleTemplate": "{{ @ }}",
-                  "linkOpenInNewTab": true,
-                  "name": "marital_status_code",
-                  "type": "string",
-                  "displayAs": "string",
-                  "order": 100005,
-                  "title": "Marital Status",
-                  "allowSearch": false,
-                  "alignContent": "left",
-                  "allowHTML": false,
-                  "highlightLinks": false,
-                  "useMonospaceFont": false,
-                  "preserveWhitespace": false
-                },
-                {
-                  "booleanValues": [
-                    "false",
-                    "true"
-                  ],
-                  "imageUrlTemplate": "{{ @ }}",
-                  "imageTitleTemplate": "{{ @ }}",
-                  "imageWidth": "",
-                  "imageHeight": "",
-                  "linkUrlTemplate": "{{ @ }}",
-                  "linkTextTemplate": "{{ @ }}",
-                  "linkTitleTemplate": "{{ @ }}",
-                  "linkOpenInNewTab": true,
-                  "name": "country_of_residence_code",
-                  "type": "string",
-                  "displayAs": "string",
-                  "order": 100007,
-                  "title": "Country of Residence_code",
-                  "allowSearch": false,
-                  "alignContent": "left",
-                  "allowHTML": false,
-                  "highlightLinks": false,
-                  "useMonospaceFont": false,
-                  "preserveWhitespace": false
-                },
-                {
-                  "booleanValues": [
-                    "false",
-                    "true"
-                  ],
-                  "imageUrlTemplate": "{{ @ }}",
-                  "imageTitleTemplate": "{{ @ }}",
-                  "imageWidth": "",
-                  "imageHeight": "",
-                  "linkUrlTemplate": "{{ @ }}",
-                  "linkTextTemplate": "{{ @ }}",
-                  "linkTitleTemplate": "{{ @ }}",
-                  "linkOpenInNewTab": true,
-                  "name": "is_trusted_name",
-                  "type": "boolean",
-                  "displayAs": "boolean",
-                  "order": 100008,
-                  "title": "is_trusted_name",
-                  "allowSearch": false,
-                  "alignContent": "right",
-                  "allowHTML": false,
-                  "highlightLinks": false,
-                  "useMonospaceFont": false,
-                  "preserveWhitespace": false
-                },
-                {
-                  "booleanValues": [
-                    "false",
-                    "true"
-                  ],
-                  "imageUrlTemplate": "{{ @ }}",
-                  "imageTitleTemplate": "{{ @ }}",
-                  "imageWidth": "",
-                  "imageHeight": "",
-                  "linkUrlTemplate": "{{ @ }}",
-                  "linkTextTemplate": "{{ @ }}",
-                  "linkTitleTemplate": "{{ @ }}",
-                  "linkOpenInNewTab": true,
-                  "name": "given_name_3",
-                  "type": "string",
-                  "displayAs": "string",
-                  "order": 100012,
-                  "title": "given_name_3",
-                  "allowSearch": false,
-                  "alignContent": "left",
-                  "allowHTML": false,
-                  "highlightLinks": false,
-                  "useMonospaceFont": false,
-                  "preserveWhitespace": false
-                },
-                {
-                  "booleanValues": [
-                    "false",
-                    "true"
-                  ],
-                  "imageUrlTemplate": "{{ @ }}",
-                  "imageTitleTemplate": "{{ @ }}",
-                  "imageWidth": "",
-                  "imageHeight": "",
-                  "linkUrlTemplate": "{{ @ }}",
-                  "linkTextTemplate": "{{ @ }}",
-                  "linkTitleTemplate": "{{ @ }}",
-                  "linkOpenInNewTab": true,
-                  "name": "given_name_4",
-                  "type": "string",
-                  "displayAs": "string",
-                  "order": 100013,
-                  "title": "given_name_4",
-                  "allowSearch": false,
-                  "alignContent": "left",
-                  "allowHTML": false,
-                  "highlightLinks": false,
-                  "useMonospaceFont": false,
-                  "preserveWhitespace": false
-                },
-                {
-                  "booleanValues": [
-                    "false",
-                    "true"
-                  ],
-                  "imageUrlTemplate": "{{ @ }}",
-                  "imageTitleTemplate": "{{ @ }}",
-                  "imageWidth": "",
-                  "imageHeight": "",
-                  "linkUrlTemplate": "{{ @ }}",
-                  "linkTextTemplate": "{{ @ }}",
-                  "linkTitleTemplate": "{{ @ }}",
-                  "linkOpenInNewTab": true,
-                  "name": "given_name_5",
-                  "type": "string",
-                  "displayAs": "string",
-                  "order": 100014,
-                  "title": "given_name_5",
-                  "allowSearch": false,
-                  "alignContent": "left",
-                  "allowHTML": false,
-                  "highlightLinks": false,
-                  "useMonospaceFont": false,
-                  "preserveWhitespace": false
-                },
-                {
-                  "booleanValues": [
-                    "false",
-                    "true"
-                  ],
-                  "imageUrlTemplate": "{{ @ }}",
-                  "imageTitleTemplate": "{{ @ }}",
-                  "imageWidth": "",
-                  "imageHeight": "",
-                  "linkUrlTemplate": "{{ @ }}",
-                  "linkTextTemplate": "{{ @ }}",
-                  "linkTitleTemplate": "{{ @ }}",
-                  "linkOpenInNewTab": true,
-                  "name": "is_preferred",
-                  "type": "boolean",
-                  "displayAs": "boolean",
-                  "order": 100017,
-                  "title": "Is Preferred",
-                  "allowSearch": false,
-                  "alignContent": "right",
-                  "allowHTML": false,
-                  "highlightLinks": false,
-                  "useMonospaceFont": false,
-                  "preserveWhitespace": false
-                },
-                {
-                  "dateTimeFormat": "DD/MM/YYYY HH:mm:ss.SSS",
-                  "booleanValues": [
-                    "false",
-                    "true"
-                  ],
-                  "imageUrlTemplate": "{{ @ }}",
-                  "imageTitleTemplate": "{{ @ }}",
-                  "imageWidth": "",
-                  "imageHeight": "",
-                  "linkUrlTemplate": "{{ @ }}",
-                  "linkTextTemplate": "{{ @ }}",
-                  "linkTitleTemplate": "{{ @ }}",
-                  "linkOpenInNewTab": true,
-                  "name": "ind_sat_period_start",
-                  "type": "datetime",
-                  "displayAs": "datetime",
-                  "order": 100031,
-                  "title": "ind_sat_period_start",
-                  "allowSearch": false,
-                  "alignContent": "right",
-                  "allowHTML": false,
-                  "highlightLinks": false,
-                  "useMonospaceFont": false,
-                  "preserveWhitespace": false
-                },
-                {
-                  "dateTimeFormat": "DD/MM/YYYY HH:mm:ss.SSS",
-                  "booleanValues": [
-                    "false",
-                    "true"
-                  ],
-                  "imageUrlTemplate": "{{ @ }}",
-                  "imageTitleTemplate": "{{ @ }}",
-                  "imageWidth": "",
-                  "imageHeight": "",
-                  "linkUrlTemplate": "{{ @ }}",
-                  "linkTextTemplate": "{{ @ }}",
-                  "linkTitleTemplate": "{{ @ }}",
-                  "linkOpenInNewTab": true,
-                  "name": "ind_sat_period_end",
-                  "type": "datetime",
-                  "displayAs": "datetime",
-                  "order": 100032,
-                  "title": "ind_sat_period_end",
-                  "allowSearch": false,
-                  "alignContent": "right",
-                  "allowHTML": false,
-                  "highlightLinks": false,
-                  "useMonospaceFont": false,
-                  "preserveWhitespace": false
-                }
-              ],
-              "allowHTMLByDefault": false,
-              "itemsPerPage": 25,
-              "paginationSize": "default",
-              "condensed": true,
-              "withRowNumber": true
+              "data": {
+                "queryName": "main_query"
+              }
             }
           },
           "position": {
