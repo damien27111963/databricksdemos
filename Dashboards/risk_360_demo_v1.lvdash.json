@@ -47,7 +47,7 @@
               "dataType": "STRING",
               "values": [
                 {
-                  "value": "Banking Supply Chain Demo"
+                  "value": "Risk 360 Demo"
                 }
               ]
             }
@@ -81,7 +81,7 @@
               "dataType": "STRING",
               "values": [
                 {
-                  "value": "Banking Supply Chain Demo"
+                  "value": "Risk 360 Demo"
                 }
               ]
             }
@@ -138,7 +138,7 @@
               "dataType": "STRING",
               "values": [
                 {
-                  "value": "Banking Supply Chain Demo"
+                  "value": "Risk 360 Demo"
                 }
               ]
             }
@@ -187,7 +187,7 @@
               "dataType": "STRING",
               "values": [
                 {
-                  "value": "Banking Supply Chain Demo"
+                  "value": "Risk 360 Demo"
                 }
               ]
             }
@@ -267,7 +267,7 @@
               "dataType": "STRING",
               "values": [
                 {
-                  "value": "Banking Supply Chain Demo"
+                  "value": "Risk 360 Demo"
                 }
               ]
             }
@@ -345,7 +345,7 @@
               "dataType": "STRING",
               "values": [
                 {
-                  "value": "Banking Supply Chain Demo"
+                  "value": "Risk 360 Demo"
                 }
               ]
             }
@@ -403,7 +403,7 @@
               "dataType": "STRING",
               "values": [
                 {
-                  "value": "Banking Supply Chain Demo"
+                  "value": "Risk 360 Demo"
                 }
               ]
             }
@@ -550,7 +550,7 @@
               "dataType": "STRING",
               "values": [
                 {
-                  "value": "Risk BCBS 239 Demo"
+                  "value": "Risk 360 Demo"
                 }
               ]
             }
@@ -586,7 +586,7 @@
               "dataType": "STRING",
               "values": [
                 {
-                  "value": "Banking Supply Chain Demo"
+                  "value": "Risk 360 Demo"
                 }
               ]
             }
@@ -620,7 +620,7 @@
               "dataType": "STRING",
               "values": [
                 {
-                  "value": "Banking Supply Chain Demo"
+                  "value": "Risk 360 Demo"
                 }
               ]
             }
@@ -1625,7 +1625,7 @@
             "name": "c7485031",
             "multilineTextboxSpec": {
               "lines": [
-                "# Risk BCBS 239 Dashboard"
+                "# Risk 360 Dashboard"
               ]
             }
           },
@@ -6861,7 +6861,7 @@
             "x": 0,
             "y": 2,
             "width": 12,
-            "height": 6
+            "height": 14
           }
         }
       ],
